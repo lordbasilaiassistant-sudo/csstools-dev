@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Flexbox Playground — CSSTools.dev</title>
+  <meta name="description" content="Free online CSS flexbox playground. Visualize flex-direction, justify-content, align-items, wrap and gap with a live interactive preview.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://lordbasilaiassistant-sudo.github.io/csstools-dev/css-flexbox-playground.html">
+  <meta property="og:title" content="CSS Flexbox Playground — CSSTools.dev">
+  <meta property="og:description" content="Free online CSS flexbox playground. Visualize flex-direction, justify-content, align-items, wrap and gap with a live interactive preview.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lordbasilaiassistant-sudo.github.io/csstools-dev/css-flexbox-playground.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CSS Flexbox Playground — CSSTools.dev">
+  <meta name="twitter:description" content="Free online CSS flexbox playground. Visualize flex-direction, justify-content, align-items, wrap and gap with a live interactive preview.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0E1019;
+      color: #E8EAF0;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a { color: #E44D26; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      background: #181B27;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .logo { font-size: 1.3rem; font-weight: 700; color: #E44D26; }
+    nav { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+    nav a { color: #8A8EA0; font-size: 0.9rem; }
+    nav a:hover, nav a.active { color: #E44D26; text-decoration: none; }
+    main { flex: 1; width: 100%; max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #8A8EA0;
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    h1 { font-size: 2rem; margin-bottom: 0.3rem; }
+    .tagline { color: #8A8EA0; margin-bottom: 1.5rem; }
+    .card {
+      background: #181B27;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    textarea, input[type="text"], input[type="number"], select {
+      width: 100%;
+      background: #0E1019;
+      color: #E8EAF0;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.9rem;
+      resize: vertical;
+    }
+    textarea:focus, input:focus { outline: none; border-color: #E44D26; }
+    button, .btn {
+      display: inline-block;
+      background: #E44D26;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.65rem 1.4rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover, .btn:hover { background: #C73E1D; }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #E44D26;
+      color: #E44D26;
+    }
+    .btn-outline:hover { background: #E44D26; color: #fff; }
+    label { display: block; margin-bottom: 0.4rem; font-weight: 600; font-size: 0.9rem; }
+    .row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .row > * { flex: 1; min-width: 0; }
+    .controls { display: flex; gap: 0.75rem; margin: 1rem 0; flex-wrap: wrap; align-items: center; }
+    .output-area {
+      background: #0E1019;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 1rem;
+      min-height: 120px;
+      white-space: pre-wrap;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+    .grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; }
+    .grid-cards .card { cursor: pointer; transition: transform 0.15s, border-color 0.15s; }
+    .grid-cards .card:hover { transform: translateY(-3px); border-color: #E44D26; }
+    .grid-cards .card h3 { margin-bottom: 0.3rem; }
+    .grid-cards .card p { color: #8A8EA0; font-size: 0.9rem; }
+    .diff-add { background: rgba(0,200,83,0.15); color: #66ff99; }
+    .diff-del { background: rgba(255,50,50,0.15); color: #ff6666; }
+    .md-preview { line-height: 1.7; }
+    .md-preview h1,.md-preview h2,.md-preview h3 { margin: 1rem 0 0.5rem; }
+    .md-preview code { background: rgba(255,255,255,0.08); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.85em; }
+    .md-preview pre { background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; overflow-x: auto; }
+    .md-preview pre code { background: none; padding: 0; }
+    .md-preview blockquote { border-left: 3px solid #E44D26; padding-left: 1rem; color: #8A8EA0; }
+    .md-preview ul, .md-preview ol { padding-left: 1.5rem; }
+    .md-preview a { color: #E44D26; }
+    @media (max-width: 640px) {
+      h1 { font-size: 1.5rem; }
+      .row { flex-direction: column; }
+      header { padding: 0.75rem 1rem; }
+    }
+  </style>
+  
+</head>
+<body>
+  <header>
+    <a href="/" class="logo">CSSTools.dev</a>
+    <nav>
+      <a href="/csstools-dev/css-gradient-generator.html">CSS Gradient Generator</a>
+      <a href="/csstools-dev/css-box-shadow-generator.html">CSS Box Shadow Generator</a>
+      <a href="/csstools-dev/css-flexbox-playground.html">CSS Flexbox Playground</a>
+    </nav>
+  </header>
+  <main>
+    <h1>CSS Flexbox Playground</h1>
+<p class="tagline">Experiment with flexbox properties and see results live</p>
+<div class="card">
+  
+<div class="row">
+  <div>
+    <label>flex-direction</label>
+    <select id="fb-dir" onchange="updateFlex()"><option>row</option><option>row-reverse</option><option>column</option><option>column-reverse</option></select>
+  </div>
+  <div>
+    <label>justify-content</label>
+    <select id="fb-jc" onchange="updateFlex()"><option>flex-start</option><option>flex-end</option><option>center</option><option>space-between</option><option>space-around</option><option>space-evenly</option></select>
+  </div>
+  <div>
+    <label>align-items</label>
+    <select id="fb-ai" onchange="updateFlex()"><option>stretch</option><option>flex-start</option><option>flex-end</option><option>center</option><option>baseline</option></select>
+  </div>
+</div>
+<div class="row">
+  <div>
+    <label>flex-wrap</label>
+    <select id="fb-wrap" onchange="updateFlex()"><option>nowrap</option><option>wrap</option><option>wrap-reverse</option></select>
+  </div>
+  <div>
+    <label>gap: <span id="fb-gap-val">10</span>px</label>
+    <input type="range" id="fb-gap" min="0" max="40" value="10" oninput="document.getElementById('fb-gap-val').textContent=this.value;updateFlex()">
+  </div>
+  <div>
+    <label>Items: <span id="fb-n-val">5</span></label>
+    <input type="range" id="fb-n" min="1" max="12" value="5" oninput="document.getElementById('fb-n-val').textContent=this.value;updateFlex()">
+  </div>
+</div>
+<div id="fb-preview" style="min-height:200px;border:2px dashed var(--clr-text-muted);border-radius:12px;padding:10px;margin:1rem 0;"></div>
+<div class="controls">
+  <button onclick="navigator.clipboard.writeText(document.getElementById('fb-output').textContent)">Copy CSS</button>
+</div>
+<div class="output-area" id="fb-output" style="font-family:monospace;white-space:pre;"></div>
+<script>
+function updateFlex(){
+  const dir=document.getElementById('fb-dir').value;
+  const jc=document.getElementById('fb-jc').value;
+  const ai=document.getElementById('fb-ai').value;
+  const wrap=document.getElementById('fb-wrap').value;
+  const gap=document.getElementById('fb-gap').value;
+  const n=parseInt(document.getElementById('fb-n').value);
+  const p=document.getElementById('fb-preview');
+  p.style.display='flex';p.style.flexDirection=dir;p.style.justifyContent=jc;
+  p.style.alignItems=ai;p.style.flexWrap=wrap;p.style.gap=gap+'px';
+  p.innerHTML='';
+  const colors=['#6C63FF','#FF6584','#00D4AA','#FFA502','#A29BFE','#FD79A8','#00CEC9','#FDCB6E','#E17055','#0984E3','#6D214F','#B33939'];
+  for(let i=0;i<n;i++){
+    const d=document.createElement('div');
+    d.style.cssText='width:60px;height:60px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:bold;font-size:1.1rem;background:'+colors[i%colors.length];
+    d.textContent=i+1;p.appendChild(d);
+  }
+  document.getElementById('fb-output').textContent='.container {\n  display: flex;\n  flex-direction: '+dir+';\n  justify-content: '+jc+';\n  align-items: '+ai+';\n  flex-wrap: '+wrap+';\n  gap: '+gap+'px;\n}';
+}
+updateFlex();
+</script>
+</div>
+
+  </main>
+  <footer>&copy; 2026 CSSTools.dev. Free tools, no signup required.</footer>
+  
+</body>
+</html>
